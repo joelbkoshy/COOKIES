@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration form</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+        integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body id="body">
+
+    <div class="main-block">
+        <div class="left-part">
+            <img src="final.png" alt="" style="height: 107px;">
+            <h1>Register for our services</h1>
+            <p>Sam's Service Centre provides Interim, Full and Major services for all brands of automobiles.</p>
+        </div>
+        <div class="form">
+            <form id="setting-form">
+                <div class="title">
+                    <i class="fas fa-pencil-alt"></i>
+                    <h2>Register here</h2>
+                    <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+                    <a href="settings1.html">
+                        <iconify-icon icon="typcn:spanner" style="color: white;width: 24px;height: 24px;padding-left: 5vh; padding-top: 1vh;    margin-left: 95px; margin-bottom: 1px;"></iconify-icon>
+                    </a>
+                </div>
+
+                <div class="info">
+                    <input class="fname" type="text" name="name" placeholder="First name" required id="Fname">
+                    <span></span>
+                    <input class="lname" type="text" name="name" placeholder="Last name" required id="Lname">
+                    <span></span>
+                    <input type="text" name="name" placeholder="Email" id="Email" required>
+                    <span></span>
+                    <input type="text" name="name" placeholder="Phone number" id="Phone" maxlength="10" minlength="10"
+                        required>
+                    <span></span>
+                    <input type="password" name="name" placeholder="Password" required id="Password" minlength="8">
+                    <span style="display: none;"></span>
+                    <label style="margin-top: 12px;margin-bottom: 12px;"><input type="checkbox"
+                            onchange="myFunction()">Show
+                        Password</label>
+
+                    <input type="password" name="name" placeholder="Confirm-Password" required id="CPassword"
+                        minlength="8">
+                    <span></span>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="checkbox"><span>I agree to the <a
+                            href="D:\MCA\2ND TRIMESTER\WEB STACK TECHNOLOGIES\PROJECT\LAB1\index.html">Privacy Policy
+                            for
+                            Sam's Service Centre.</a></span>
+                </div>
+                <button type="button" onclick="validate_name()">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        var temp = 0
+        var firstName = document.getElementById('Fname')
+        var lastName = document.getElementById('Lname')
+        var email = document.getElementById('Email')
+        var phoneNo = document.getElementById('Phone')
+        var password = document.getElementById('Password')
+        var cpassword = document.getElementById('CPassword')
+        var span = document.getElementsByTagName('span')
+        firstName.oninput = function () {
+            var num = /[0-9]/
+            if (firstName.value.match(num)) {
+                fnameLen = firstName.value.length
+                firstName.value = firstName.value.slice(0, fnameLen - 1)
+            }
+            var re1 = /^[A-Z][A-Za-z]{2,}/
+            if (firstName.value.match(re1)) {
+                span[0].innerText = "Valid"
+                span[0].style.color = "lime";
+            }
+            else {
+                span[0].innerText = "Invalid";
+                span[0].style.color = "red";
+            }
+        }
+        lastName.oninput = function () {
+            var num = /[0-9]/
+            if (lastName.value.match(num)) {
+                lnameLen = lastName.value.length
+                lastName.value = lastName.value.slice(0, lnameLen - 1)
+            }
+            var re1 = /^[A-Z][A-Za-z]{2,}/
+            if (lastName.value.match(re1)) {
+                span[1].innerText = "Valid"
+                span[1].style.color = "lime";
+            }
+            else {
+                span[1].innerText = "Invalid";
+                span[1].style.color = "red";
+            }
+        }
+        email.oninput = function () {
+            const regex1 = /^([a-z0-9\.-]+)@([a-z0-9]+)\.([a-z]{1,8})university\.([a-z]{1,6})$/;
+            if (regex1.test(email.value)) {
+                span[2].innerText = "Your Email is Valid";
+                span[2].style.color = "lime";
+            }
+            else {
+                span[2].innerText = "Invalid Email Id";
+                span[2].style.color = "red";
+            }
+        }
+        phoneNo.oninput = function () {
+            const numreg = /[0-9]{10}/
+            const numreg1 = /(?!^\d+$)^.+$/g
+            if (phoneNo.value.match(numreg)) {
+                span[3].innerText = "Valid"
+                span[3].style.color = "lime";
+            }
+            else if (phoneNo.value.match(numreg1)) {
+                phoneNoLength = phoneNo.value.length
+                phoneNo.value = phoneNo.value.slice(0, phoneNoLength - 1);
+            }
+            else {
+                span[3].innerText = "Invalid"
+                span[3].style.color = "red";
+            }
+        }
+
+        password.oninput = function () {
+            var start_end = /^[a-z].*[a-z]$/g
+            var lowercase = /[a-z]/g
+            var uppercase = /[A-Z]/g
+            var num = /[0-9]/g
+            var spl = /[!@#$%^&*()~`\_\-\+\={}\[\]|\\;:'",./<>?]/g
+            if (!password.value.match(lowercase)) {
+                span[4].innerText = "Minimum one lowercase character is needed"
+                span[4].style.color = "red"
+                span[4].style.display = "block"
+            }
+            if (!password.value.match(num)) {
+                span[4].innerText = "Add a minimum of 1 numeric character [0-9]"
+                span[4].style.color = "red"
+                span[4].style.display = "block"
+            }
+            if (!password.value.match(uppercase)) {
+                span[4].innerText = "Minimum one uppercase character is needed."
+                span[4].style.color = "red"
+                span[4].style.display = "block"
+            }
+            if (!password.value.match(spl)) {
+                span[4].innerText = "Minimum one special character is needed."
+                span[4].style.color = "red"
+                span[4].style.display = "block"
+            }
+            if (password.value.length < 8) {
+                span[4].innerText = "Minimum 8 characters are needed."
+                span[4].style.display = "block"
+            }
+            if (!password.value.match(start_end)) {
+                span[4].innerText = " The starting and ending character should be a lowercase character."
+                span[4].style.color = "red"
+                span[4].style.display = "block"
+            }
+            if (password.value.match(start_end) && password.value.match(lowercase) && password.value.match(uppercase) && password.value.match(spl) && (password.value.length > 7) && password.value.match(num)) {
+                span[4].innerText = "Valid Password!"
+                span[4].style.color = "lime";
+                span[4].style.display = "block"
+                temp = 1
+            }
+        }
+        cpassword.oninput = function () {
+
+            if (temp != 1) {
+                span[5].innerText = "Password criterias are not satisfied!"
+                span[5].style.color = "red"
+            }
+            if (cpassword.value == password.value && password.value != "" && temp == 1) {
+                span[5].innerText = "Password matched!!"
+                span[5].style.color = "lime"
+            }
+
+        }
+        //Show Password
+        function myFunction() {
+            var x = document.getElementById('Password');
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+        //Cookies, Sessions and local storage
+        document.onreadystatechange = function () {
+            var cookiesList = document.cookie.split(";")
+            for (i = 0; i < cookiesList.length; i++) {
+                if (cookiesList[i].match(/\bBgColor=/)) {
+                    var bgCookie = cookiesList[i]
+                    var bgCookiesList = bgCookie.split("=")
+                    var bgCookieValue = bgCookiesList[1];
+                    var body = document.getElementById('body')
+                    body.style.backgroundColor = bgCookieValue;
+
+                }
+                if (cookiesList[i].match(/\bBackImg=/)) {
+                    var bgImgCookie = cookiesList[i]
+                    var bgImgCookiesList = bgImgCookie.split("=")
+                    var bgImgCookieValue = bgImgCookiesList[1];
+                    var form = document.getElementsByClassName('form')[0]
+                    form.style.backgroundImage = bgImgCookieValue;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
